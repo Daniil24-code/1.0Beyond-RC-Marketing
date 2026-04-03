@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond R&C — Instagram Reels Playbook</title>
+<style>
+:root{
+  --bg:#07101F;--bg2:#0B1628;--bg3:#0F1E36;--surface:#122040;
+  --border:#1C2F50;--border2:#243D63;
+  --gold:#C9A84C;--gold2:#E8CC80;--gold3:#F5E9C0;
+  --white:#EEF4FF;--muted:#7B9CC4;--muted2:#4A6890;
+  --tof:#0EA86A;--tofbg:#071F14;
+  --mof:#E87C2D;--mofbg:#1F1007;
+  --bof:#9B6DFF;--bofbg:#130D24;
+  --blue:#4A9EFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--white);line-height:1.6}
+.sidenav{position:fixed;top:0;left:0;height:100vh;width:220px;background:rgba(7,16,31,.97);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:200}
+.sidenav-top{padding:1.75rem 1.5rem 1.25rem;border-bottom:1px solid var(--border)}
+.sn-brand{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.sn-name{font-size:12px;color:var(--muted);line-height:1.4}
+.sn-links{flex:1;padding:1rem 0;overflow-y:auto}
+.ni{display:flex;align-items:center;gap:10px;padding:.6rem 1.5rem;cursor:pointer;border-left:3px solid transparent;text-decoration:none;transition:all .2s}
+.ni:hover{background:rgba(201,168,76,.06);border-left-color:rgba(201,168,76,.3)}
+.ni.active{background:rgba(201,168,76,.1);border-left-color:var(--gold)}
+.ni-num{font-size:10px;font-weight:700;color:var(--muted2);letter-spacing:.04em;min-width:18px}
+.ni.active .ni-num{color:var(--gold)}
+.ni-lbl{font-size:13px;color:var(--muted);font-weight:500}
+.ni.active .ni-lbl{color:var(--white)}
+.ni-dot{width:5px;height:5px;border-radius:50%;background:var(--border2);margin-left:auto;flex-shrink:0}
+.ni.active .ni-dot{background:var(--gold)}
+.sn-foot{padding:1.25rem 1.5rem;border-top:1px solid var(--border);font-size:11px;color:var(--muted2);line-height:1.5}
+.sn-foot span{color:var(--gold)}
+.main{margin-left:220px}
+.progress-bar{position:fixed;top:0;left:220px;right:0;height:2px;background:rgba(201,168,76,.08);z-index:300}
+.progress-fill{height:100%;background:linear-gradient(to right,var(--gold),var(--gold2));width:0%;transition:width .08s}
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:5rem 4rem;position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 65% 50%,#0A1E40 0%,var(--bg) 70%)}
+.hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(201,168,76,.06);pointer-events:none}
+.hero-content{max-width:680px;position:relative;z-index:2}
+.eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:1.75rem}
+.ey-line{width:30px;height:1px;background:var(--gold);opacity:.6}
+.ey-txt{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.hero-title{font-size:54px;font-weight:900;line-height:1.06;margin-bottom:1rem;letter-spacing:-.025em}
+.hero-title .t1{color:var(--white)}
+.hero-title .t2{color:var(--gold)}
+.hero-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:540px;margin-bottom:2.5rem}
+.hero-stats{display:flex;gap:2.5rem;margin-bottom:2.5rem}
+.stat{border-left:2px solid var(--gold);padding-left:1rem}
+.stat-n{font-size:28px;font-weight:900;color:var(--white);line-height:1}
+.stat-l{font-size:10px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.07em}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap}
+.hpill{font-size:10px;font-weight:700;padding:6px 13px;border-radius:4px;letter-spacing:.05em;text-transform:uppercase}
+.hp-tof{background:rgba(14,168,106,.15);color:var(--tof);border:1px solid rgba(14,168,106,.25)}
+.hp-mof{background:rgba(232,124,45,.15);color:var(--mof);border:1px solid rgba(232,124,45,.25)}
+.hp-bof{background:rgba(155,109,255,.15);color:var(--bof);border:1px solid rgba(155,109,255,.25)}
+.scroll-cue{position:absolute;bottom:2.5rem;left:4rem;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);display:flex;align-items:center;gap:8px;z-index:2}
+.scroll-bars{display:flex;flex-direction:column;gap:3px}
+.scroll-bars i{display:block;height:1px;background:var(--muted2)}
+@keyframes sb{0%,100%{opacity:.2}50%{opacity:.8}}
+.scroll-bars i:nth-child(1){width:14px;animation:sb 2s ease infinite}
+.scroll-bars i:nth-child(2){width:10px;animation:sb 2s .15s ease infinite}
+.scroll-bars i:nth-child(3){width:6px;animation:sb 2s .3s ease infinite}
+/* SECTIONS */
+.sec{padding:5rem 4rem;border-top:1px solid var(--border)}
+.sec-hdr{margin-bottom:3rem}
+.sec-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.sec-num{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.15em;text-transform:uppercase}
+.sec-line{flex:1;height:1px;background:linear-gradient(to right,var(--border2),transparent)}
+.sec-title{font-size:32px;font-weight:900;color:var(--white);letter-spacing:-.02em;line-height:1.12;margin-bottom:.75rem}
+.sec-desc{font-size:14px;color:var(--muted);line-height:1.7;max-width:680px}
+/* GENERIC CARD */
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:border-color .2s}
+.card:hover{border-color:var(--border2)}
+.cg{border-left:3px solid var(--gold)}
+.ct{border-left:3px solid var(--tof)}
+.cm{border-left:3px solid var(--mof)}
+.cb{border-left:3px solid var(--bof)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.gauto{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.c-ey{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.ey-g{color:var(--gold)}.ey-t{color:var(--tof)}.ey-m{color:var(--mof)}.ey-b{color:var(--bof)}.ey-bl{color:var(--blue)}
+.c-title{font-size:15px;font-weight:700;color:var(--white);margin-bottom:.5rem}
+.c-body{font-size:13px;color:var(--muted);line-height:1.6}
+.divider{height:1px;background:var(--border);margin:2.5rem 0}
+/* BADGE */
+.bdg{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.75rem}
+.bg-t{background:rgba(14,168,106,.15);color:var(--tof);border:1px solid rgba(14,168,106,.2)}
+.bg-m{background:rgba(232,124,45,.15);color:var(--mof);border:1px solid rgba(232,124,45,.2)}
+.bg-b{background:rgba(155,109,255,.15);color:var(--bof);border:1px solid rgba(155,109,255,.2)}
+.bg-g{background:rgba(201,168,76,.12);color:var(--gold);border:1px solid rgba(201,168,76,.2)}
+.bg-bl{background:rgba(74,158,255,.12);color:var(--blue);border:1px solid rgba(74,158,255,.2)}
+/* TRANSFORM BOX */
+.tbox{background:linear-gradient(135deg,#0B1A34,#0D1E3C);border:1px solid var(--gold);border-radius:12px;padding:2rem 2.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.tbox::before{content:'';position:absolute;top:-80px;right:-80px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 70%);pointer-events:none}
+.tbox-lbl{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:.875rem}
+.tbox-txt{font-size:15px;font-style:italic;color:var(--muted);line-height:1.75}
+.tbox-txt em{color:var(--white);font-style:normal;font-weight:600}
+/* FUNNEL */
+.funnel3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:2rem}
+.fc{border-radius:12px;padding:1.5rem;border:1px solid transparent;position:relative;overflow:hidden}
+.fc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.fc-t{background:var(--tofbg);border-color:rgba(14,168,106,.2)}.fc-t::after{background:var(--tof)}
+.fc-m{background:var(--mofbg);border-color:rgba(232,124,45,.2)}.fc-m::after{background:var(--mof)}
+.fc-b{background:var(--bofbg);border-color:rgba(155,109,255,.2)}.fc-b::after{background:var(--bof)}
+.fc-ico{font-size:26px;margin-bottom:.875rem;display:block}
+.fc-hd{font-size:14px;font-weight:700;margin-bottom:.5rem}
+.fh-t{color:var(--tof)}.fh-m{color:var(--mof)}.fh-b{color:var(--bof)}
+.fc-body{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:.875rem}
+.fc-cta{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+/* TABLE */
+.tw{overflow-x:auto;border-radius:10px;border:1px solid var(--border);margin-bottom:2rem}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:#081222;color:var(--gold);padding:11px 14px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid var(--border2)}
+thead th.center{text-align:center}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--muted)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:rgba(255,255,255,.018)}
+td.bright{color:var(--white);font-weight:600}
+td.it{font-style:italic;color:#7aaae0}
+td.tof-c{color:var(--tof);font-weight:700;text-align:center}
+td.mof-c{color:var(--mof);font-weight:700;text-align:center}
+td.bof-c{color:var(--bof);font-weight:700;text-align:center}
+td.dm{color:var(--muted2);text-align:center}
+/* HOOKS */
+.hook-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:2rem}
+.hk{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;display:flex;gap:1rem;transition:border-color .2s}
+.hk:hover{border-color:var(--border2)}
+.hk-num{font-size:30px;font-weight:900;color:var(--border2);line-height:1;min-width:30px;flex-shrink:0}
+.hk-type{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
+.hk-txt{font-size:13px;color:var(--muted);line-height:1.55;font-style:italic;margin-bottom:.5rem}
+.hk-why{font-size:12px;color:var(--muted2);line-height:1.45}
+/* CTAs */
+.cta-grp{margin-bottom:2.5rem}
+.cta-grp-hd{display:flex;align-items:center;gap:14px;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.cta-ico{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ci-t{background:rgba(14,168,106,.15)}.ci-m{background:rgba(232,124,45,.15)}.ci-b{background:rgba(155,109,255,.15)}
+.cta-grp-name{font-size:16px;font-weight:700;color:var(--white)}
+.cta-grp-sub{font-size:12px;color:var(--muted);margin-top:1px}
+.cta-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ctacard{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.25rem}
+.cta-type{font-size:11px;font-weight:700;color:var(--white);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em}
+.cta-word{font-size:13px;color:var(--gold2);font-style:italic;line-height:1.5;margin-bottom:.5rem;border-left:2px solid rgba(201,168,76,.3);padding-left:.75rem}
+.cta-why{font-size:12px;color:var(--muted2);line-height:1.45}
+/* SCRIPTS */
+.sblock{margin-bottom:2rem;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.shdr{background:linear-gradient(135deg,#081426,#0D1E3C);padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)}
+.shdr-meta{display:flex;align-items:center;gap:7px;margin-bottom:.5rem;flex-wrap:wrap}
+.s-title{font-size:15px;font-weight:700;color:var(--white)}
+.s-sub{font-size:12px;color:var(--gold);font-style:italic;margin-top:2px}
+.stbl{width:100%;border-collapse:collapse;font-size:13px}
+.stbl thead th{background:#050D1C;color:var(--muted2);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;padding:9px 14px;border-bottom:1px solid var(--border);text-align:left}
+.stbl tbody td{padding:11px 14px;border-bottom:1px solid rgba(28,47,80,.5);vertical-align:top;line-height:1.5;color:var(--muted)}
+.stbl tbody tr:last-child td{border-bottom:none}
+.stbl tbody tr:hover td{background:rgba(255,255,255,.018)}
+.pt{font-size:11px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:.04em}
+.el{font-size:11px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.04em}
+.sp{color:var(--muted);font-style:italic;line-height:1.55}
+.sc{background:rgba(14,168,106,.1);border:1px solid rgba(14,168,106,.2);border-radius:6px;padding:8px 10px;font-size:11px;font-weight:600;color:var(--tof);white-space:pre-line;line-height:1.5}
+/* CALENDAR */
+.cal7{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:1.5rem}
+.cc{border-radius:10px;border:1px solid var(--border);background:var(--bg3);overflow:hidden;transition:transform .2s,border-color .2s}
+.cc:hover{transform:translateY(-3px);border-color:var(--border2)}
+.cc-top{padding:.625rem .75rem;border-bottom:1px solid var(--border)}
+.cc-tt{background:rgba(14,168,106,.12)}.cc-tm{background:rgba(232,124,45,.12)}.cc-tb{background:rgba(155,109,255,.12)}
+.cc-day{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+.cd-t{color:var(--tof)}.cd-m{color:var(--mof)}.cd-b{color:var(--bof)}
+.cc-fn{font-size:10px;font-weight:700;margin-top:2px;opacity:.7}
+.cc-body{padding:.75rem}
+.cc-types{font-size:11px;color:var(--muted2);line-height:1.45;margin-bottom:.4rem}
+.cc-eg{font-size:11px;font-style:italic;color:var(--muted);line-height:1.35;margin-bottom:.4rem}
+.cc-cta{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+/* TIP */
+.tip{background:linear-gradient(135deg,rgba(74,158,255,.08),rgba(74,158,255,.04));border:1px solid rgba(74,158,255,.2);border-radius:10px;padding:1.25rem 1.5rem;font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:1.75rem}
+.tip strong{color:var(--blue);font-weight:700}
+/* VHOOK */
+.vhk{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.25rem;transition:border-color .2s}
+.vhk:hover{border-color:var(--gold)}
+.vhk-ico{width:40px;height:40px;border-radius:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;margin-bottom:.875rem;font-size:18px}
+.vhk-t{font-size:13px;font-weight:700;color:var(--white);margin-bottom:.4rem}
+.vhk-b{font-size:12px;color:var(--muted);line-height:1.55}
+/* FOOTER */
+.footer{padding:3rem 4rem 4rem;border-top:1px solid var(--border);text-align:center}
+.f-brand{font-size:18px;font-weight:900;color:var(--white);margin-bottom:.4rem}
+.f-brand span{color:var(--gold)}
+.f-sub{font-size:12px;color:var(--muted2)}
+/* RESPONSIVE */
+@media(max-width:960px){
+  .sidenav{display:none}.main{margin-left:0}.progress-bar{left:0}
+  .hero{padding:3rem 2rem}.scroll-cue{left:2rem}.sec{padding:3.5rem 2rem}
+  .funnel3,.grid3,.grid2,.hook-grid,.cta-cards{grid-template-columns:1fr}
+  .cal7{grid-template-columns:repeat(3,1fr)}.hero-title{font-size:36px}
+  .footer{padding:2rem}
+}
+@media(max-width:600px){.cal7{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+
+<nav class="sidenav">
+  <div class="sidenav-top">
+    <div class="sn-brand">The Brand Solution</div>
+    <div class="sn-name">Beyond Residence &amp; Citizenship<br>North America Edition</div>
+  </div>
+  <div class="sn-links">
+    <a class="ni active" href="#hero"><span class="ni-num">00</span><span class="ni-lbl">Overview</span><span class="ni-dot"></span></a>
+    <a class="ni" href="#avatars"><span class="ni-num">01</span><span class="ni-lbl">Client Avatars</span><span class="ni-dot"></span></a>
+    <a class="ni" href="#funnel"><span class="ni-num">02</span><span class="ni-lbl">Funnel Framework</span><span class="ni-dot"></span></a>
+    <a class="ni" href="#hooks"><span class="ni-num">03</span><span class="ni-lbl">Scripted Hooks</span><span class="ni-dot"></span></a>
+    <a class="ni" href="#visual"><span class="ni-num">04</span><span class="ni-lbl">Visual Hooks</span><span class="ni-dot"></span></a>
+    <a class="ni" href="#ctas"><span class="ni-num">05</span><span class="ni-lbl">CTA Library</span><span class="ni-dot"></span></a>
+    <a class="ni" href="#scripts"><span class="ni-num">07</span><span class="ni-lbl">Story Scripts</span><span class="ni-dot"></span></a>
+    <a class="ni" href="#calendar"><span class="ni-num">08</span><span class="ni-lbl">Content Calendar</span><span class="ni-dot"></span></a>
+  </div>
+  <div class="sn-foot">Built by <span>Daniil Antonov</span><br>The Brand Solution</div>
+</nav>
+
+<div class="main">
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-ring" style="width:700px;height:700px;top:-200px;right:-200px"></div>
+  <div class="hero-ring" style="width:450px;height:450px;top:-80px;right:-80px"></div>
+  <div class="hero-content">
+    <div class="eyebrow"><div class="ey-line"></div><span class="ey-txt">Instagram Reels Playbook &nbsp;·&nbsp; North America Edition</span></div>
+    <h1 class="hero-title">
+      <span class="t1">Beyond Residence<br>&amp; Citizenship</span><br>
+      <span class="t2">Complete Content System</span>
+    </h1>
+    <p class="hero-sub">All hooks, CTAs, story scripts, and a weekly calendar — every piece built for your North American HNW entrepreneur and Introducer audience. Structured around the TOF / MOF / BOF conversion framework.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">12</div><div class="stat-l">Scripted hooks</div></div>
+      <div class="stat"><div class="stat-n">24</div><div class="stat-l">Total CTAs</div></div>
+      <div class="stat"><div class="stat-n">10</div><div class="stat-l">Full scripts</div></div>
+      <div class="stat"><div class="stat-n">20+</div><div class="stat-l">Years authority</div></div>
+    </div>
+    <div class="hero-pills">
+      <span class="hpill hp-tof">TOF — Reach &amp; Awareness</span>
+      <span class="hpill hp-mof">MOF — Authority &amp; Trust</span>
+      <span class="hpill hp-bof">BOF — Consultations &amp; Leads</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="scroll-bars"><i></i><i></i><i></i></div>Scroll to explore</div>
+</section>
+
+<!-- 01 AVATARS -->
+<section id="avatars" class="sec">
+  <div class="sec-hdr">
+    <div class="sec-eyebrow"><span class="sec-num">Section 01</span><div class="sec-line"></div></div>
+    <h2 class="sec-title">Your Client Avatars</h2>
+    <p class="sec-desc">Two distinct audiences. Two completely different motivations. Every piece of content you create should be tagged to one of these two profiles before you film a single second.</p>
+  </div>
+  <div class="grid2" style="margin-bottom:2rem">
+    <div class="card cg">
+      <div class="c-ey ey-g">Avatar 1</div>
+      <div class="c-title">The Entrepreneur / Investor</div>
+      <div class="c-body" style="margin-bottom:1.25rem">US or Canadian HNW entrepreneur, age 35–60, $1M–$50M+ net worth. Built real wealth over a decade. Starting to realise a single passport is a single point of failure for everything they've built.</div>
+      <div class="c-ey ey-m" style="margin-top:.25rem">Zero state — where they are now</div>
+      <div class="c-body" style="margin-bottom:1rem">One passport. One jurisdiction. Limited international banking. Family security dependent on a single government's decisions. They've thought about this for years. They still haven't acted.</div>
+      <div class="c-ey ey-t">Hero state — where they want to be</div>
+      <div class="c-body" style="margin-bottom:1rem">A second passport or EU residency — legal, clean, fully handled. Banking across jurisdictions. Family protected regardless of geopolitical shifts. Genuinely global.</div>
+      <div class="c-ey ey-b">Core message</div>
+      <div class="c-body" style="color:var(--gold2);font-style:italic">"You built the company and the wealth. We build your global freedom plan."</div>
+    </div>
+    <div class="card" style="border-color:rgba(201,168,76,.3)">
+      <div class="c-ey ey-g">Avatar 2</div>
+      <div class="c-title">The Introducer — Referral Partner</div>
+      <div class="c-body" style="margin-bottom:1.25rem">Wealth manager, lawyer, financial advisor, or family office professional. Already serves HNW clients. Wants to add investment migration as a value-added service without building new infrastructure.</div>
+      <div class="c-ey ey-m" style="margin-top:.25rem">Zero state — where they are now</div>
+      <div class="c-body" style="margin-bottom:1rem">Clients are already asking about second passports. No trusted referral partner. Missing passive income. Their reputation is on the line every time they point someone elsewhere without confidence.</div>
+      <div class="c-ey ey-t">Hero state — where they want to be</div>
+      <div class="c-body" style="margin-bottom:1rem">A 20% referral fee per successful client with Beyond handling everything. The simplest process imaginable: sign one agreement, make the introduction, earn when it closes.</div>
+      <div class="c-ey ey-b">Core message</div>
+      <div class="c-body" style="color:var(--gold2);font-style:italic">"Your clients are already asking. Now you have the answer — and a 20% fee when it closes."</div>
+    </div>
+  </div>
+  <div class="tbox">
+    <div class="tbox-lbl">Transformation Statement — Entrepreneur / Investor</div>
+    <div class="tbox-txt">"I help <em>high-net-worth North American entrepreneurs and investors</em> go from holding a single passport and feeling exposed to geopolitical risk, to building a <em>legally secure global freedom plan</em> — so their wealth, family, and options are never dependent on a single country's decisions."</div>
+  </div>
+  <div class="tbox" style="border-color:rgba(74,158,255,.4)">
+    <div class="tbox-lbl" style="color:var(--blue)">Transformation Statement — Introducer</div>
+    <div class="tbox-txt">"I help <em>wealth managers, lawyers, and financial advisors</em> add investment migration as a high-value, zero-overhead service — so they can answer the second passport question their HNW clients are already asking, and <em>earn a 20% referral fee</em> every time it closes."</div>
+  </div>
+</section>
+
+<!-- 02 FUNNEL -->
+<section id="funnel" class="sec">
+  <div class="sec-hdr">
+    <div class="sec-eyebrow"><span class="sec-num">Section 02</span><div class="sec-line"></div></div>
+    <h2 class="sec-title">The Funnel Framework</h2>
+    <p class="sec-desc">Investment migration is a long-cycle trust sale. Nobody sees one reel and sends $200,000 to a government the same afternoon. The funnel is how you build the trust that eventually converts.</p>
+  </div>
+  <div class="funnel3">
+    <div class="fc fc-t"><span class="fc-ico">&#9651;</span><div class="fc-hd fh-t">Top of Funnel — TOF</div><div class="fc-body">Reach strangers. Geopolitical risk, passport myths, common mistakes. They don't know Beyond yet. Make them stop and think about something they've been ignoring.</div><span class="bdg bg-t" style="display:inline-block;margin-bottom:.75rem">Reach &amp; Awareness</span><div class="fc-cta" style="color:var(--tof)">CTA: Follow</div></div>
+    <div class="fc fc-m"><span class="fc-ico">&#9651;</span><div class="fc-hd fh-m">Middle of Funnel — MOF</div><div class="fc-body">Build authority with warm viewers. Programme breakdowns, comparison content, step-by-step processes. Educate and qualify simultaneously.</div><span class="bdg bg-m" style="display:inline-block;margin-bottom:.75rem">Followers &amp; Email Leads</span><div class="fc-cta" style="color:var(--mof)">CTA: DM Keyword / Save</div></div>
+    <div class="fc fc-b"><span class="fc-ico">&#9651;</span><div class="fc-hd fh-b">Bottom of Funnel — BOF</div><div class="fc-body">Convert your most engaged audience into consultations. Proof, results, credentials. The trust is already built — now make the direct ask without apology.</div><span class="bdg bg-b" style="display:inline-block;margin-bottom:.75rem">Consultations &amp; Applications</span><div class="fc-cta" style="color:var(--bof)">CTA: Book Call / DM Offer</div></div>
+  </div>
+  <div class="tip"><strong>The investment migration difference:</strong> Post at least 4 weeks of TOF + MOF before any BOF lead-generation CTAs. Build the audience first. Applications follow naturally once trust is established.</div>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:32%">Content Type</th><th style="width:16%">Category</th><th class="center" style="width:10%">TOF</th><th class="center" style="width:10%">MOF</th><th class="center" style="width:10%">BOF</th><th style="width:22%">Best CTA</th></tr></thead>
+      <tbody>
+        <tr><td class="bright">Geopolitical risk explainer</td><td>Educational</td><td class="tof-c">✓</td><td class="dm">–</td><td class="dm">–</td><td>Follow</td></tr>
+        <tr><td class="bright">Passport myths vs facts</td><td>Educational</td><td class="tof-c">✓</td><td class="dm">–</td><td class="dm">–</td><td>Follow</td></tr>
+        <tr><td class="bright">Common mistakes</td><td>Educational</td><td class="tof-c">✓</td><td class="dm">–</td><td class="dm">–</td><td>Follow</td></tr>
+        <tr><td class="bright">Do's and don'ts</td><td>Educational</td><td class="tof-c">✓</td><td class="mof-c">✓</td><td class="dm">–</td><td>Follow</td></tr>
+        <tr><td class="bright">Programme breakdown</td><td>Educational</td><td class="dm">–</td><td class="mof-c">✓</td><td class="dm">–</td><td>DM keyword</td></tr>
+        <tr><td class="bright">Step-by-step process</td><td>Educational</td><td class="dm">–</td><td class="mof-c">✓</td><td class="dm">–</td><td>DM keyword</td></tr>
+        <tr><td class="bright">Entrepreneur transformation story</td><td>Storytelling</td><td class="tof-c">✓</td><td class="mof-c">✓</td><td class="dm">–</td><td>Follow</td></tr>
+        <tr><td class="bright">Shocking hook story</td><td>Storytelling</td><td class="tof-c">✓</td><td class="dm">–</td><td class="dm">–</td><td>Follow</td></tr>
+        <tr><td class="bright">Calling out bad advice</td><td>Authority</td><td class="tof-c">✓</td><td class="dm">–</td><td class="dm">–</td><td>Follow</td></tr>
+        <tr><td class="bright">Unpopular opinion</td><td>Authority</td><td class="tof-c">✓</td><td class="dm">–</td><td class="dm">–</td><td>Follow</td></tr>
+        <tr><td class="bright">Proof / results content</td><td>Authority</td><td class="dm">–</td><td class="dm">–</td><td class="bof-c">✓</td><td>Book call</td></tr>
+        <tr><td class="bright">Credentials &amp; track record</td><td>Authority</td><td class="dm">–</td><td class="dm">–</td><td class="bof-c">✓</td><td>DM offer</td></tr>
+        <tr><td class="bright">Programme comparison series</td><td>Series</td><td class="dm">–</td><td class="mof-c">✓</td><td class="dm">–</td><td>DM keyword</td></tr>
+        <tr><td class="bright">Q&amp;A reply series</td><td>Series</td><td class="dm">–</td><td class="mof-c">✓</td><td class="bof-c">✓</td><td>DM / Comments</td></tr>
+        <tr><td class="bright">Double down (broad)</td><td>Double down</td><td class="tof-c">✓</td><td class="dm">–</td><td class="dm">–</td><td>Follow</td></tr>
+        <tr><td class="bright">Double down (deep)</td><td>Double down</td><td class="dm">–</td><td class="mof-c">✓</td><td class="dm">–</td><td>DM keyword</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 03 HOOKS -->
+<section id="hooks" class="sec">
+  <div class="sec-hdr">
+    <div class="sec-eyebrow"><span class="sec-num">Section 03</span><div class="sec-line"></div></div>
+    <h2 class="sec-title">Scripted Hooks</h2>
+    <p class="sec-desc">All 12 scripted hooks adapted for Beyond's North American HNW investment migration niche. One hook per reel. The hook is your first 1–2 seconds. Never combine two hooks in the same video.</p>
+  </div>
+  <div class="hook-grid">
+    <div class="hk"><div class="hk-num">01</div><div><div class="hk-type">Bold Claim <span class="bdg bg-t" style="margin:0 0 0 6px;vertical-align:middle">TOF</span></div><div class="hk-txt">"Your passport is the most dangerous single point of failure in your entire financial life. And almost nobody treats it that way."</div><div class="hk-why">Reframes something they've never thought about. 'Dangerous' stops a risk-aware entrepreneur cold.</div></div></div>
+    <div class="hk"><div class="hk-num">02</div><div><div class="hk-type">Mistake Hook <span class="bdg bg-t" style="margin:0 0 0 6px;vertical-align:middle">TOF</span></div><div class="hk-txt">"Stop treating your second passport as a tax scheme. That thinking is costing you the real benefit of global citizenship."</div><div class="hk-why">Corrects a misconception they probably hold. They keep watching to find out what the real benefit is.</div></div></div>
+    <div class="hk"><div class="hk-num">03</div><div><div class="hk-type">Number Hook <span class="bdg bg-t" style="margin:0 0 0 6px;vertical-align:middle">TOF</span></div><div class="hk-txt">"3 reasons successful entrepreneurs get a second passport — and none of them are what you think."</div><div class="hk-why">Numbers create expectation. The 'not what you think' framing demands they verify their assumption.</div></div></div>
+    <div class="hk"><div class="hk-num">04</div><div><div class="hk-type">Curiosity Gap <span class="bdg bg-t" style="margin:0 0 0 6px;vertical-align:middle">TOF</span></div><div class="hk-txt">"The real reason ultra-wealthy families hold multiple passports — and it has nothing to do with taxes."</div><div class="hk-why">Every entrepreneur watching has a theory. They need it confirmed or corrected. The loop must close.</div></div></div>
+    <div class="hk"><div class="hk-num">05</div><div><div class="hk-type">Unpopular Opinion <span class="bdg bg-t" style="margin:0 0 0 6px;vertical-align:middle">TOF</span></div><div class="hk-txt">"Unpopular opinion: a second passport is not a luxury for the ultra-rich. It's basic risk management for any 7-figure business."</div><div class="hk-why">Challenges the belief that this is only for billionaires. Controversial and direct.</div></div></div>
+    <div class="hk"><div class="hk-num">06</div><div><div class="hk-type">Personal Confession <span class="bdg bg-m" style="margin:0 0 0 6px;vertical-align:middle">MOF</span></div><div class="hk-txt">"I used to think global citizenship was for people hiding from their governments. Here's what changed my mind entirely."</div><div class="hk-why">Vulnerability with a clear before/after frame. Mirrors exactly what many first-time viewers believe.</div></div></div>
+    <div class="hk"><div class="hk-num">07</div><div><div class="hk-type">Warning Hook <span class="bdg bg-t" style="margin:0 0 0 6px;vertical-align:middle">TOF</span></div><div class="hk-txt">"If your entire business wealth is tied to a single country's banking system, watch this before you continue operating that way."</div><div class="hk-why">Fear-based and urgent. Speaks to a real, specific financial risk that HNW viewers recognise immediately.</div></div></div>
+    <div class="hk"><div class="hk-num">08</div><div><div class="hk-type">Challenge Hook <span class="bdg bg-t" style="margin:0 0 0 6px;vertical-align:middle">TOF</span></div><div class="hk-txt">"Most entrepreneurs can't answer this one question about their global financial exposure. Can you? Here it is."</div><div class="hk-why">Challenges their self-image as someone who has everything figured out. Ego stops the scroll.</div></div></div>
+    <div class="hk"><div class="hk-num">09</div><div><div class="hk-type">Relatability Hook <span class="bdg bg-t" style="margin:0 0 0 6px;vertical-align:middle">TOF</span></div><div class="hk-txt">"POV: you've spent 10 years building a 7-figure business. You have one passport. One government can restrict your access tomorrow."</div><div class="hk-why">Perfectly mirrors the situation of Beyond's ideal client. They see themselves in the first five words.</div></div></div>
+    <div class="hk"><div class="hk-num">10</div><div><div class="hk-type">Secret Hook <span class="bdg bg-t" style="margin:0 0 0 6px;vertical-align:middle">TOF</span></div><div class="hk-txt">"Nobody in the wealth management world tells their clients this about second passports. I'll say it plainly."</div><div class="hk-why">Insider framing. Positions Beyond as the advisor who tells the truth that others won't.</div></div></div>
+    <div class="hk"><div class="hk-num">11</div><div><div class="hk-type">Fast Promise <span class="bdg bg-m" style="margin:0 0 0 6px;vertical-align:middle">MOF</span></div><div class="hk-txt">"In 60 seconds I'll show you every investment migration programme available to North American entrepreneurs right now — with real costs."</div><div class="hk-why">Entrepreneurs value their time. A precise promise earns their attention and keeps them to the end.</div></div></div>
+    <div class="hk"><div class="hk-num">12</div><div><div class="hk-type">Shocking Stat <span class="bdg bg-t" style="margin:0 0 0 6px;vertical-align:middle">TOF</span></div><div class="hk-txt">"Only 1 in 10 high-net-worth North Americans holds a second passport. Here's what the other 9 are risking right now."</div><div class="hk-why">Creates immediate social comparison. The viewer wants to know if they're in the 1 — or the 9.</div></div></div>
+  </div>
+</section>
+
+<!-- 04 VISUAL HOOKS -->
+<section id="visual" class="sec">
+  <div class="sec-hdr">
+    <div class="sec-eyebrow"><span class="sec-num">Section 04</span><div class="sec-line"></div></div>
+    <h2 class="sec-title">Visual Hooks</h2>
+    <p class="sec-desc">What the viewer sees before you speak. In investment migration, the visual hook also signals premium positioning — setting, production quality, and framing establish authority before the script even starts. Pair one visual hook with one scripted hook in every reel.</p>
+  </div>
+  <div class="gauto">
+    <div class="vhk"><div class="vhk-ico">&#128247;</div><div class="vhk-t">Mid-Action Open</div><div class="vhk-b">Open mid-way through flipping a passport, pointing at a world map, or reviewing documents in a high-end office. No intro. No 'hey guys.' Immediate professional energy before a word is spoken.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#128292;</div><div class="vhk-t">Bold Text Overlay</div><div class="vhk-b">Large text before any spoken word: "Your passport is a liability. Here's how to fix it." Stops the scroll on mute — how most LinkedIn-adjacent HNW audiences browse between meetings.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#9870;</div><div class="vhk-t">Passport Contrast</div><div class="vhk-b">Left: one passport on a plain desk. Right: three passports fanned out with residency cards. The entire value proposition in one frame — no explanation needed.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#127970;</div><div class="vhk-t">Premium Setting</div><div class="vhk-b">Film from a high-end hotel lobby, client meeting room, or financial district backdrop. HNW viewers respond to peer-level environments. Premium setting signals premium service.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#128065;</div><div class="vhk-t">Close-Up Face</div><div class="vhk-b">Extreme close-up, direct eye contact, serious expression. Hold one full second before speaking. Creates the feeling of a direct, private, one-to-one conversation.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#128506;</div><div class="vhk-t">Point at Map</div><div class="vhk-b">Point at a world map highlighting Caribbean or European locations, or at a cost breakdown on screen. Combines movement, visual data, and eye direction — three stimuli in one second.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#127758;</div><div class="vhk-t">Before / After Contrast Cut</div><div class="vhk-b">Hard cut: one country highlighted on a world map, then 30+ countries lit up. The entire value proposition communicated in under two seconds — no narration needed.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#128081;</div><div class="vhk-t">Passport Stack Reveal</div><div class="vhk-b">Start with a closed hand. Open it to reveal multiple passports. No context. Pure curiosity. "What is that?" is one of the most powerful scroll-stopping triggers on any platform.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#9992;</div><div class="vhk-t">Slow-Motion Travel</div><div class="vhk-b">Cinematic slow-motion of a premium location — European city street, Caribbean shoreline, private airport. Aspirational visuals connect the product to a lifestyle outcome the viewer already wants.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#9203;</div><div class="vhk-t">Timer / Countdown</div><div class="vhk-b">"You have 90 seconds to understand your biggest financial blind spot." Timer visible from frame one. Time pressure is primal. Entrepreneurs hate wasted seconds — a countdown earns them.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#128269;</div><div class="vhk-t">Document Zoom-In</div><div class="vhk-b">Wide shot of a passport on a desk, then rapid zoom into the country seal and name. Movement directs attention. Creates a "what country is that?" moment that demands a full watch.</div></div>
+    <div class="vhk"><div class="vhk-ico">&#9889;</div><div class="vhk-t">Caption Mismatch</div><div class="vhk-b">Footage of a standard passport control queue with text: "How my clients skip this in 47 countries." Cognitive dissonance stops the brain cold — it needs to resolve the contradiction.</div></div>
+  </div>
+</section>
+
+<!-- 05 CTAs -->
+<section id="ctas" class="sec">
+  <div class="sec-hdr">
+    <div class="sec-eyebrow"><span class="sec-num">Section 05</span><div class="sec-line"></div></div>
+    <h2 class="sec-title">Complete CTA Library</h2>
+    <p class="sec-desc">One CTA per video — always. Every extra CTA you add reduces the chance of any being followed. Pick the one action you most want the viewer to take, match it to the funnel stage, and ask for that only.</p>
+  </div>
+  <div class="cta-grp">
+    <div class="cta-grp-hd">
+      <div class="cta-ico ci-t">&#9651;</div>
+      <div><div class="cta-grp-name">Follower CTAs</div><div class="cta-grp-sub">Grow your audience — use on TOF content targeting strangers who have never seen Beyond before.</div></div>
+      <span class="bdg bg-t" style="margin-left:auto;flex-shrink:0">TOF</span>
+    </div>
+    <div class="cta-cards">
+      <div class="ctacard"><div class="cta-type">The Part 2 Hook</div><div class="cta-word">"Follow so you don't miss Part 2 — I'm covering the exact process for getting a Caribbean passport as a US or Canadian citizen."</div><div class="cta-why">Creates urgency. The follow becomes the price of admission for what's already promised.</div></div>
+      <div class="ctacard"><div class="cta-type">The Series Promise</div><div class="cta-word">"Follow — I post investment migration breakdowns for North American entrepreneurs every week."</div><div class="cta-why">Niche-specific language filters for the right audience immediately. People follow when they know exactly what's coming.</div></div>
+      <div class="ctacard"><div class="cta-type">The Value Exchange</div><div class="cta-word">"Follow if you want to understand your actual global options — not the sales version, the real one."</div><div class="cta-why">Addresses the distrust HNW investors feel toward this industry. Frames the follow as access to honesty.</div></div>
+      <div class="ctacard"><div class="cta-type">The Identity CTA</div><div class="cta-word">"If you're serious about protecting what you've built — not just managing it — follow."</div><div class="cta-why">Builders who are 'serious' act. Those who aren't scroll. That's the right filter for a premium advisory audience.</div></div>
+      <div class="ctacard"><div class="cta-type">The Content Promise</div><div class="cta-word">"Follow — my next video covers the one Caribbean programme that gives US entrepreneurs E-2 treaty access. Most advisors don't mention it."</div><div class="cta-why">Specific insider knowledge teased. Highest-value follow incentive in this niche.</div></div>
+      <div class="ctacard"><div class="cta-type">The Repeat Reminder</div><div class="cta-word">"I post breakdowns like this every Tuesday and Friday — follow so they land in your feed."</div><div class="cta-why">Specific schedule builds habit. Followers who expect you show up. Showing up builds trust before any consultation.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="cta-grp">
+    <div class="cta-grp-hd">
+      <div class="cta-ico ci-m">&#9651;</div>
+      <div><div class="cta-grp-name">DM CTAs</div><div class="cta-grp-sub">Start advisory conversations — use on MOF content with warm viewers who already know Beyond.</div></div>
+      <span class="bdg bg-m" style="margin-left:auto;flex-shrink:0">MOF</span>
+    </div>
+    <div class="cta-cards">
+      <div class="ctacard"><div class="cta-type">The Keyword DM</div><div class="cta-word">"DM me the word 'PASSPORT' and I'll send you the full programme comparison — Caribbean and European options side by side, with real costs."</div><div class="cta-why">One word to type. The specific deliverable makes it a genuine value exchange, not a funnel.</div></div>
+      <div class="ctacard"><div class="cta-type">The Question DM</div><div class="cta-word">"DM me your biggest question about second citizenship right now — I personally answer every one."</div><div class="cta-why">Invites a real conversation. When you respond thoughtfully, trust rises faster than any content piece ever could.</div></div>
+      <div class="ctacard"><div class="cta-type">The Free Resource DM</div><div class="cta-word">"DM me 'COMPARE' and I'll send you the programme comparison sheet I use with every new client."</div><div class="cta-why">Specific, useful, zero risk. The keyword makes it trackable and the resource makes the DM worth initiating.</div></div>
+      <div class="ctacard"><div class="cta-type">The Honest Offer</div><div class="cta-word">"If you've been thinking about a second passport for your family and want a straight answer — DM me."</div><div class="cta-why">Sounds like a real conversation, not a funnel. HNW clients respond to honesty and avoid pressure.</div></div>
+      <div class="ctacard"><div class="cta-type">The Vulnerability DM</div><div class="cta-word">"If you've been putting this off for years and aren't sure where to start — DM me. No agenda, just a conversation."</div><div class="cta-why">Removes the pressure entirely. Many HNW clients have been thinking about this for years without acting.</div></div>
+      <div class="ctacard"><div class="cta-type">The Behind the Scenes</div><div class="cta-word">"DM me 'INSIDE' and I'll show you what a full Caribbean CBI application actually looks like from start to approval."</div><div class="cta-why">Exclusive access in a space where most information is locked behind consultation fees.</div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="cta-grp">
+    <div class="cta-grp-hd">
+      <div class="cta-ico ci-b">&#9651;</div>
+      <div><div class="cta-grp-name">Lead CTAs</div><div class="cta-grp-sub">Convert to consultations and introductions — use on BOF content with your most engaged, loyal audience.</div></div>
+      <span class="bdg bg-b" style="margin-left:auto;flex-shrink:0">BOF</span>
+    </div>
+    <div class="cta-cards">
+      <div class="ctacard"><div class="cta-type">The Free Consultation</div><div class="cta-word">"DM me 'PLAN' if you'd like a free 20-minute call to talk through which programme makes sense for your situation."</div><div class="cta-why">Zero risk. The free call qualifies the lead and starts a genuine advisory relationship.</div></div>
+      <div class="ctacard"><div class="cta-type">The Social Proof Lead</div><div class="cta-word">"We've completed hundreds of successful applications across Europe and the Caribbean. If you're ready to start yours — DM me."</div><div class="cta-why">20+ years of proven track record is the most powerful thing Beyond has. Use it directly as the conversion mechanism.</div></div>
+      <div class="ctacard"><div class="cta-type">The Qualifying Question</div><div class="cta-word">"Are you a North American entrepreneur who's been thinking about a second passport for more than six months without taking a step? DM me 'READY.'"</div><div class="cta-why">Self-qualifying at the highest level. Only serious warm leads respond. High quality over high quantity.</div></div>
+      <div class="ctacard"><div class="cta-type">The Transformation Offer</div><div class="cta-word">"I've helped entrepreneurs from Toronto to Texas go from single passport to fully approved Caribbean citizenship. DM me 'FREEDOM' when you're ready."</div><div class="cta-why">Proof + geography + emotional keyword. 'Freedom' is the deepest desire in the avatar profile.</div></div>
+      <div class="ctacard"><div class="cta-type">The Urgency Close</div><div class="cta-word">"We take a limited number of new applications per quarter to maintain quality — link in bio before Q2 closes."</div><div class="cta-why">Real scarcity signals a premium service. Beyond isn't chasing anyone. That positioning matters with HNW clients.</div></div>
+      <div class="ctacard" style="border-color:rgba(74,158,255,.3)"><div class="cta-type" style="color:var(--blue)">The Introducer Lead</div><div class="cta-word">"If you're a wealth manager or lawyer whose clients are asking about second passports — DM me 'PARTNER.' I'll walk you through the referral programme in 15 minutes."</div><div class="cta-why">Dedicated CTA for the Introducer avatar. Speaks their language. Highly specific conversion trigger.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 SCRIPTS -->
+<section id="scripts" class="sec">
+  <div class="sec-hdr">
+    <div class="sec-eyebrow"><span class="sec-num">Section 07</span><div class="sec-line"></div></div>
+    <h2 class="sec-title">Story Selling Scripts</h2>
+    <p class="sec-desc">All 10 scripts follow the same 5-part structure. Never lead with the product — lead with the problem the product solves. In investment migration, trust is built through specificity, honesty, and documented proof.</p>
+  </div>
+  <div class="card cg" style="margin-bottom:2rem">
+    <div class="c-ey ey-g">The 5-Part Structure</div>
+    <div class="tw" style="margin-top:.875rem;margin-bottom:0">
+      <table>
+        <thead><tr><th style="width:22%">Part</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td class="bright">Part 1 — The problem</td><td>Open with a geopolitical, financial, or freedom risk the viewer feels personally. If they don't see their situation in Part 1, they won't stay for the solution.</td></tr>
+          <tr><td class="bright">Part 2 — Who you are</td><td>Introduce Beyond through the lens of the problem. 20+ years of experience matters because of what it means for the viewer's outcome — not as a credential to be proud of.</td></tr>
+          <tr><td class="bright">Part 3 — The solution</td><td>Be specific. The more specific the explanation, the more credible you appear. Vague advice feels like marketing. Specific advice feels like expertise.</td></tr>
+          <tr><td class="bright">Part 4 — The result</td><td>One measurable outcome. Not a category — one specific result. A client approved in 9 months. A family protected. A European residency secured.</td></tr>
+          <tr><td class="bright">Part 5 — The CTA</td><td>One clear action. Follow for TOF. DM keyword for MOF. Consultation DM or link in bio for BOF.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Script 01 -->
+  <div class="sblock">
+    <div class="shdr">
+      <div class="shdr-meta"><span class="bdg bg-t">TOF</span><span class="bdg bg-g">CTA: Follow</span><span class="bdg bg-bl">Hook: Bold Claim</span></div>
+      <div class="s-title">Script 01 — Single Point of Failure (Numbered Series Opener)</div>
+      <div class="s-sub">The opening script in a series on why a single passport is a financial liability. Designed for maximum reach with strangers.</div>
+    </div>
+    <table class="stbl">
+      <thead><tr><th style="width:10%">Part</th><th style="width:14%">Element</th><th style="width:47%">What You Say — Spoken Script</th><th style="width:29%">Text on Screen</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pt">Part 1</span></td><td><span class="el">The Problem</span></td><td class="sp">"Your passport is the most dangerous single point of failure in your entire financial life. And almost nobody treats it like one. I'll explain exactly why — and what to do about it — in the next 90 seconds."</td><td><div class="sc">YOUR PASSPORT is your biggest financial liability. Most people don't know this.</div></td></tr>
+        <tr><td><span class="pt">Part 2</span></td><td><span class="el">Who You Are</span></td><td class="sp">"I work with an investment migration firm that has been securing second citizenships and EU residencies for HNW clients for over 20 years. Hundreds of approvals across Europe and the Caribbean. I've seen what happens when people wait — and what's possible when they don't."</td><td><div class="sc">20+ years. Hundreds of approved clients. Europe + Caribbean.</div></td></tr>
+        <tr><td><span class="pt">Part 3</span></td><td><span class="el">The Solution</span></td><td class="sp">"A single passport means a single government decides where you can travel, where you can bank, and what opportunities you can access. A second citizenship or EU residency changes all of that — legally, cleanly, in 9 to 18 months depending on the programme."</td><td><div class="sc">The fix:
+✅ Second passport or EU residency
+✅ Legal. Clean.
+✅ 9–18 months.
+Caribbean or Europe.</div></td></tr>
+        <tr><td><span class="pt">Part 4</span></td><td><span class="el">The Result</span></td><td class="sp">"One of our clients — a US entrepreneur who'd been running an online business for 8 years — completed Caribbean citizenship in under a year. He now banks across three jurisdictions and travels to 140+ countries visa-free. Same business. Completely different options."</td><td><div class="sc">US entrepreneur. Caribbean CBI. Under 12 months. 140+ countries visa-free.</div></td></tr>
+        <tr><td><span class="pt">Part 5</span></td><td><span class="el">The CTA</span></td><td class="sp">"Follow — Point 2 in this series covers the most common mistake North American entrepreneurs make when they first explore this. It's the one that delays applications by years. Dropping Wednesday."</td><td><div class="sc">Follow for Mistake #2
+Delays people by years.
+📅 Wednesday</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Script 04 -->
+  <div class="sblock">
+    <div class="shdr">
+      <div class="shdr-meta"><span class="bdg bg-m">MOF</span><span class="bdg bg-g">CTA: DM 'COMPARE'</span><span class="bdg bg-bl">Hook: Fast Promise</span></div>
+      <div class="s-title">Script 04 — Programme Breakdown (Framework + Keyword DM)</div>
+      <div class="s-sub">The most educational script in the library. Real costs provided openly — trust is built through transparency.</div>
+    </div>
+    <table class="stbl">
+      <thead><tr><th style="width:10%">Part</th><th style="width:14%">Element</th><th style="width:47%">What You Say — Spoken Script</th><th style="width:29%">Text on Screen</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pt">Part 1</span></td><td><span class="el">The Problem</span></td><td class="sp">"In the next 60 seconds I'm going to show you exactly which second citizenship and residency programmes are available to North American entrepreneurs right now — with real costs. Most advisors bury this in consultations. Here it is plainly."</td><td><div class="sc">In 60 seconds: Every programme. Real costs. No consultation required.</div></td></tr>
+        <tr><td><span class="pt">Part 3</span></td><td><span class="el">The Solution</span></td><td class="sp">"Caribbean: Dominica from $200K, Antigua from $230K, Grenada from $235K — that one includes E-2 treaty access to the USA, which most people don't know. St Lucia $240K, St Kitts $250K. All: full passport in 9–12 months, no residency required. Europe: Greece Golden Visa €250K, Cyprus Permanent Residency €300K, Italy from €250K startup investment, Spain passive income visa from €28,800 per year."</td><td><div class="sc">CARIBBEAN CBI:
+🌴 Dominica $200K
+🌴 Antigua $230K
+🌴 Grenada $235K (E-2!)
+🌴 St Lucia $240K
+🌴 St Kitts $250K
+—
+EUROPE:
+🇬🇷 Greece €250K
+🇨🇾 Cyprus €300K
+🇮🇹 Italy €250K
+🇪🇸 Spain €28.8K/yr</div></td></tr>
+        <tr><td><span class="pt">Part 5</span></td><td><span class="el">The CTA</span></td><td class="sp">"DM me the word 'COMPARE' and I'll send you the full programme comparison sheet — every option, every cost, every key advantage, side by side. Free. No consultation required to get it."</td><td><div class="sc">DM me: 'COMPARE'
+Full comparison sheet.
+Every option. Every cost.
+Free. No pitch. 📩</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Script 08 -->
+  <div class="sblock">
+    <div class="shdr">
+      <div class="shdr-meta"><span class="bdg bg-b">BOF</span><span class="bdg bg-g">CTA: DM 'PARTNER'</span><span class="bdg bg-bl">Hook: Number Hook</span></div>
+      <div class="s-title">Script 08 — Introducer Script (Referral Partner Offer)</div>
+      <div class="s-sub">Dedicated script targeting the Introducer avatar — wealth managers, lawyers, and financial advisors whose clients are already asking about second passports.</div>
+    </div>
+    <table class="stbl">
+      <thead><tr><th style="width:10%">Part</th><th style="width:14%">Element</th><th style="width:47%">What You Say — Spoken Script</th><th style="width:29%">Text on Screen</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pt">Part 1</span></td><td><span class="el">The Problem</span></td><td class="sp">"Three things wealth managers and lawyers miss when a client asks about second passports — and the third one costs them a meaningful referral fee every single time."</td><td><div class="sc">3 things wealth managers miss when clients ask about second passports. #3 costs you a referral fee. Every time.</div></td></tr>
+        <tr><td><span class="pt">Part 3</span></td><td><span class="el">The Solution</span></td><td class="sp">"One: no trusted referral partner, so the client finds someone on their own and you lose the relationship. Two: not knowing programme costs well enough to position the conversation correctly. Three: not realising that a 20% referral fee on a Caribbean CBI approval is between $10,000 and $15,000 per client — with zero operational overhead on your end."</td><td><div class="sc">❌ No partner → client lost
+❌ Don't know costs
+❌ Missing 20% fee
+= $10K–$15K per client
+Zero overhead on your end.</div></td></tr>
+        <tr><td><span class="pt">Part 4</span></td><td><span class="el">The Result</span></td><td class="sp">"Our introducers sign a one-time agreement, introduce qualified clients, and receive a 20% referral fee upon successful completion. Beyond handles everything — advice, applications, qualifying investment, approvals. The introducer does one thing: make the introduction."</td><td><div class="sc">You do: 1 agreement.
+1 introduction.
+Beyond does: everything else.
+You earn: 20% on completion.</div></td></tr>
+        <tr><td><span class="pt">Part 5</span></td><td><span class="el">The CTA</span></td><td class="sp">"If you're a wealth manager, lawyer, or financial advisor whose clients are asking about second passports, DM me the word 'PARTNER.' I'll walk you through how the programme works in 15 minutes. No long calls. No obligation."</td><td><div class="sc">Wealth managers. Lawyers. Advisors.
+Clients asking about passports?
+DM me: 'PARTNER' 🤝
+15 minutes. No obligation.</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tip"><strong>All 10 scripts are in the Google Drive document</strong> — 3 TOF follower scripts, 3 MOF DM scripts, 3 BOF lead scripts, and 1 Double Down continuation. Each has complete spoken lines and text-on-screen for every single part.</div>
+</section>
+
+<!-- 08 CALENDAR -->
+<section id="calendar" class="sec">
+  <div class="sec-hdr">
+    <div class="sec-eyebrow"><span class="sec-num">Section 08</span><div class="sec-line"></div></div>
+    <h2 class="sec-title">Weekly Content Calendar</h2>
+    <p class="sec-desc">Your repeatable weekly posting structure. Consistency compounds in investment migration more than in almost any other niche — this is a trust sale that converts over months. Every week covers all three funnel stages. Saturday is locked for the Introducer avatar.</p>
+  </div>
+  <div class="cal7">
+    <div class="cc"><div class="cc-top cc-tt"><div class="cc-day cd-t">Sunday</div><div class="cc-fn" style="color:var(--tof)">TOF</div></div><div class="cc-body"><div class="cc-types">Geopolitical risk · Passport myths · Common mistakes · Numbered series</div><div class="cc-eg">"3 reasons your single passport is a liability you haven't priced into your financial plan"</div><div class="cc-cta" style="color:var(--tof)">CTA: Follow</div></div></div>
+    <div class="cc"><div class="cc-top cc-tm"><div class="cc-day cd-m">Monday</div><div class="cc-fn" style="color:var(--mof)">MOF</div></div><div class="cc-body"><div class="cc-types">Programme breakdown · Step-by-step process · Comparison content</div><div class="cc-eg">"Caribbean CBI vs European Golden Visa — which one is right for which client"</div><div class="cc-cta" style="color:var(--mof)">CTA: DM keyword</div></div></div>
+    <div class="cc"><div class="cc-top cc-tt"><div class="cc-day cd-t">Tuesday</div><div class="cc-fn" style="color:var(--tof)">TOF</div></div><div class="cc-body"><div class="cc-types">Unpopular opinion · Calling out bad advice · Do's &amp; don'ts</div><div class="cc-eg">"Unpopular opinion: a second passport isn't a luxury — it's the same risk logic as business insurance"</div><div class="cc-cta" style="color:var(--tof)">CTA: Follow</div></div></div>
+    <div class="cc"><div class="cc-top cc-tm"><div class="cc-day cd-m">Wednesday</div><div class="cc-fn" style="color:var(--mof)">MOF</div></div><div class="cc-body"><div class="cc-types">Confession / story · Expert breakdown · Client journey · Myth-bust</div><div class="cc-eg">"I thought investment migration was for people hiding from governments. Here's what changed my mind."</div><div class="cc-cta" style="color:var(--mof)">CTA: Follow / DM</div></div></div>
+    <div class="cc"><div class="cc-top cc-tb"><div class="cc-day cd-b">Thursday</div><div class="cc-fn" style="color:var(--bof)">BOF</div></div><div class="cc-body"><div class="cc-types">Proof / results · Credentials · Story arc series · Cliffhanger</div><div class="cc-eg">"US entrepreneur. 7-figure exit. Grenada CBI approved in 9 months. Here's what it actually looked like."</div><div class="cc-cta" style="color:var(--bof)">CTA: Bio link / DM</div></div></div>
+    <div class="cc"><div class="cc-top cc-tt"><div class="cc-day cd-t">Friday</div><div class="cc-fn" style="color:var(--tof)">TOF</div></div><div class="cc-body"><div class="cc-types">Shocking hook · Transformation story · Double down (broad)</div><div class="cc-eg">"Every programme, every cost, every key advantage — in 90 seconds. No consultation required."</div><div class="cc-cta" style="color:var(--tof)">CTA: DM / Follow / Bio</div></div></div>
+    <div class="cc" style="border-color:rgba(155,109,255,.3)"><div class="cc-top cc-tb" style="background:rgba(155,109,255,.12)"><div class="cc-day cd-b">Saturday</div><div class="cc-fn" style="color:var(--bof)">BOF — Introducers</div></div><div class="cc-body"><div class="cc-types">Introducer series · Q&amp;A reply · Day in the life · Double down deep</div><div class="cc-eg">"To every wealth manager whose clients are asking about second passports — here's how the referral programme works."</div><div class="cc-cta" style="color:var(--bof)">CTA: DM 'PARTNER'</div></div></div>
+  </div>
+  <div class="tip"><strong>Saturday is locked for Introducers.</strong> Don't mix it with Entrepreneur/Investor content. Two separate audiences, two different motivations — they need separate, targeted posts that speak directly to their specific situation.</div>
+  <div class="grid2">
+    <div class="card ct"><div class="c-ey ey-t">Build before you sell</div><div class="c-body">Post at least 4 weeks of TOF + MOF content before any BOF lead-generation CTAs. Build the audience first. Applications follow naturally once trust is established.</div></div>
+    <div class="card cm"><div class="c-ey ey-m">Be specific, not vague</div><div class="c-body">Programme-specific content with real costs and timelines massively outperforms vague 'global freedom' content. Name the country, the investment amount, the timeline. Specificity signals expertise.</div></div>
+    <div class="card cg"><div class="c-ey ey-g">The double down rule</div><div class="c-body">When geopolitical risk content spikes in performance — and it will during news events — film the follow-up variation within 48 hours. The algorithm is warm and already knows who to show it to.</div></div>
+    <div class="card cb"><div class="c-ey ey-b">Two audiences, two tracks</div><div class="c-body">The Entrepreneur/Investor and the Introducer need separate content with separate CTAs. Saturday is locked for Introducers. Don't blend the messaging — each avatar has a completely different motivation.</div></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="f-brand">The Brand <span>Solution</span></div>
+  <div class="f-sub">Built by Daniil Antonov &nbsp;·&nbsp; Beyond Residence &amp; Citizenship — North America Edition</div>
+</footer>
+
+</div>
+
+<script>
+window.addEventListener('scroll',function(){
+  var el=document.documentElement;
+  document.getElementById('pf').style.width=(el.scrollTop/(el.scrollHeight-el.clientHeight)*100)+'%';
+});
+var secs=document.querySelectorAll('section[id]');
+var nis=document.querySelectorAll('.ni');
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      var id=e.target.id;
+      nis.forEach(function(n){
+        n.classList.remove('active');
+        if(n.getAttribute('href')==='#'+id) n.classList.add('active');
+      });
+    }
+  });
+},{threshold:0.25,rootMargin:'-10% 0px -60% 0px'});
+secs.forEach(function(s){obs.observe(s);});
+</script>
+</body>
+</html>
